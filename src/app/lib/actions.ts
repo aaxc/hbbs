@@ -1,22 +1,10 @@
 'use server'
- 
+
 import { UUID, scryptSync, timingSafeEqual } from "crypto";
-import mariadb from "mariadb";
+import pool from "@/app/lib/db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  idleTimeout: 60,
-});
-
-process.on("SIGINT", async function() {
-  await pool.end();
-  process.exit();
-})
 
 export type timestamp = {
   period: string,
