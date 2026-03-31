@@ -429,7 +429,7 @@ export async function generateCodes(formData: FormData) {
         const code = randomUUID().split('-')[0]
         codes.push(code)
         qrCodes.push(await QRCode.toDataURL(
-            `https://www.avghagenabalva.lv/login?code=${code}`,
+            `https://www.hagenabalva.lv/login?code=${code}`,
             {
                 type: 'image/png',
                 errorCorrectionLevel: 'H',
@@ -453,7 +453,7 @@ export async function generateCodes(formData: FormData) {
                                 },
                             }),
                             new TextRun({
-                                text: 'https://www.avghagenabalva.lv',
+                                text: 'https://www.hagenabalva.lv',
                                 break: 1,
                                 size: 20,
                             }),
