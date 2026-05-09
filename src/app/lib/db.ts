@@ -16,15 +16,12 @@ const pool =
     idleTimeout: 30,
   });
 
-// In development, preserve the pool across HMR reloads so we don't
-// create a new pool (and leak connections/event-listeners) on every edit.
+// In development, preserve the pool across HMR reloads
 if (process.env.NODE_ENV !== "production") {
   globalThis.dbPool = pool;
 }
 
-// Register the shutdown handler exactly once on the real process object.
-// Using `process.once` instead of `process.on` guarantees a single listener
-// even if this module were somehow evaluated more than once.
+// Register the shutdown handler exactly once on the real process object
 process.once("SIGINT", async () => {
   await pool.end();
   process.exit(0);
